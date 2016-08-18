@@ -19,7 +19,7 @@ env:
   - PATH="$HOME/.composer/vendor/bin:$PATH"
   - DRUPAL_TI_MODULE_NAME="sendgrid_integration"
   - DRUPAL_TI_SIMPLETEST_GROUP="Sendgrid Integration"
-  - DRUPAL_TI_ENVIRONMENT="drupal-7"
+  - DRUPAL_TI_ENVIRONMENT="drupal-8"
   - DRUPAL_TI_DB="drupal_travis_db"
   - DRUPAL_TI_DB_URL="mysql://root:@127.0.0.1/drupal_travis_db"
   - DRUPAL_TI_WEBSERVER_URL="http://127.0.0.1"
