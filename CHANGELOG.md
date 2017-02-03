@@ -24,7 +24,7 @@ upgrade to Guzzle 6.x sometime in the unknown future.
 Major changes
 --------------------------------------------------------------------------------
 * Composer Manager Required (https://www.drupal.org/project/composer_manager)
-* Requires PHP 5.4 or greater
+* Requires PHP 5.5 or greater
 * New sub-module for Reports
 * MailSystem Module (https://www.drupal.org/project/mailsystem)
 
