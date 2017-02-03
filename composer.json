@@ -13,6 +13,6 @@
     "php"
   ],
   "require": {
-    "fastglass/sendgrid": ">=1.0.4"
+    "fastglass/sendgrid": ">=1.0.6"
   }
 }
