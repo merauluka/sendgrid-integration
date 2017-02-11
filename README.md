@@ -31,11 +31,6 @@ line and the use of Drush.
 1. Move this folder under modules directory of your installation,
    example sites/all/modules or sites/default/modules
 
-2. Install Dependencies which include Composer Manager. Use Drush to update
-   dependencies via composer `drush composer-manager update --no-dev`.
-   This will download the Sendgrid API. It is important to use the --no-dev option so you
-   do not download libraries that are used for development and testing only.
-
 2. Navigate to Modules and enable SendGrid Integration in the Mail category.
 
 3. Configure your SendGrid API-Key in admin/config/services/sendgrid
@@ -45,7 +40,6 @@ line and the use of Drush.
    System-wide default MailSystemInterface class to "SendGridMailSystem". As an
    example, see this [image](https://www.drupal.org/files/issues/sengrid-integration-mailsystem-settings-example.png).
 
-* Composer Manager Documentation: [https://www.drupal.org/node/2405805](https://www.drupal.org/node/2405805)
 * Composer Documentation: [https://getcomposer.org/doc/](https://getcomposer.org/doc/)
 
 HTML Email
