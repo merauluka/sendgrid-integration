@@ -26,3 +26,32 @@ function sendgrid_integration_install() {
   $mailsystem_config->set($prefix . '.' . MailsystemManager::MAILSYSTEM_TYPE_SENDING, 'sendgrid_integration');
   $mailsystem_config->save();
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function sendgrid_integration_requirements($phase) {
+  $requirements = array();
+  $config = \Drupal::configFactory()->get('sendgrid_integration.settings');
+  switch ($phase) {
+    case 'runtime':
+      if (empty($config->get('apikey'))) {
+        $requirements['sendgrid_integration'] = array(
+          'title' => t('SendGrid Integration Settings'),
+          'value' => t('API Key Not Set'),
+          'severity' => REQUIREMENT_ERROR,
+          'description' => t('You need to <a href="@url">add a SendGrid API Secret Key</a> for Drupal to be able to deliver mail through SendGrid Integration.', array('@url' => Url::fromRoute('sendgrid_integration.settings_form')->toString())),
+        );
+      }
+      else {
+        $requirements['sendgrid_integration'] = array(
+          'title' => t('SendGrid Integration Settings'),
+          'severity' => REQUIREMENT_OK,
+          'value' => t('API Secret Key saved'),
+        );
+      }
+      break;
+  }
+
+  return $requirements;
+}
