@@ -6,6 +6,9 @@ Use the issue tracker located at [Drupal.org](https://www.drupal.org/sendgrid_in
 for bug reports or questions about this module. If you want more info about
 SendGrid services, contact [SendGrid](https://sendgrid.com).
 
+This module uses a wrapper library for the SendGrid API. At the moment the
+wrapper library is for V2 of the API. V3 upgrade is being developed.
+
 FUNCTIONALITY
 --------------------------------------------------------------------------------
 This module overrides default email sending behaviour and sending emails through
