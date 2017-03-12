@@ -18,7 +18,8 @@ function sendgrid_integration_help($route_name, RouteMatchInterface $route_match
   switch ($route_name) {
     case 'help.page.sendgrid_integration':
       $output .= '<h3>' . \Drupal::translation()->translate('About') . '</h3>';
-      $output .= '<p>' . \Drupal::translation()->translate('Module provides own implementation of MailSystemIntegration, replacing the default implementation and uses SendGrid Web API instead.') . '</p>';
+      $output .= '<p>' . \Drupal::translation()
+          ->translate('Module provides own implementation of MailSystemIntegration, replacing the default implementation and uses SendGrid Web API instead.') . '</p>';
   }
   return $output;
 }

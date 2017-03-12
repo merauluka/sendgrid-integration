@@ -17,8 +17,9 @@ function sendgrid_integration_reports_disable() {
 function sendgrid_integration_reports_install() {
   $t = get_t();
   drupal_set_message($t('You can configure SendGrid settings under Administer > Configuration > !link',
-    array(
-      '!link' => l($t('SendGrid settings'), 'admin/config/system/sendgrid'))
+    [
+      '!link' => l($t('SendGrid settings'), 'admin/config/system/sendgrid'),
+    ]
   ));
 }
 
@@ -34,7 +35,7 @@ function sendgrid_integration_reports_uninstall() {
  */
 
 function sendgrid_integration_reports_schema() {
-  $schema = array();
+  $schema = [];
   $schema['cache_sendgrid_integration_reports'] = drupal_get_schema_unprocessed('system', 'cache');
   return $schema;
 }

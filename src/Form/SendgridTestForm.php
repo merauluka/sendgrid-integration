@@ -122,13 +122,20 @@ class SendGridTestForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->configFactory()->getEditable('sendgrid_integration.settings');
+    $config = $this->configFactory()
+      ->getEditable('sendgrid_integration.settings');
     $site_settings = $this->config('system.site');
 
     $config->set('test_defaults.to', $form_state->getValue('to'));
     $config->set('test_defaults.subject', $form_state->getValue('subject'));
-    $config->set('test_defaults.body.value', $form_state->getValue(['body', 'value']));
-    $config->set('test_defaults.body.format', $form_state->getValue(['body', 'format']));
+    $config->set('test_defaults.body.value', $form_state->getValue([
+      'body',
+      'value',
+    ]));
+    $config->set('test_defaults.body.format', $form_state->getValue([
+      'body',
+      'format',
+    ]));
     $config->set('test_defaults.from_name', $form_state->getValue('from_name'));
     $config->set('test_defaults.to_name', $form_state->getValue('to_name'));
     $config->set('test_defaults.reply_to', $form_state->getValue('reply_to'));
@@ -146,7 +153,8 @@ class SendGridTestForm extends FormBase {
     else {
       $from = $site_settings->get('mail');
     }
-    $result = $this->mailManager->mail('sendgrid_integration', 'test', $config->get('test_defaults.to'), $this->languageManager->getDefaultLanguage()->getId(), $params, $from);
+    $result = $this->mailManager->mail('sendgrid_integration', 'test', $config->get('test_defaults.to'), $this->languageManager->getDefaultLanguage()
+      ->getId(), $params, $from);
     if (isset($result['result']) && $result['result'] == TRUE) {
       drupal_set_message($this->t('SendGrid test email sent from %from to %to.', [
         '%from' => $from,

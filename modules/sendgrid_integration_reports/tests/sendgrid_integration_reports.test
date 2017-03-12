@@ -28,7 +28,7 @@ class SendgridIntegrationReportsTestCase extends SendgridIntegrationTestCase {
     // Call the parent with an array of modules to enable for the test.
     $modules = [
       'sendgrid_integration',
-      'sendgrid_integration_reports'
+      'sendgrid_integration_reports',
     ];
     parent::setUp($modules);
 

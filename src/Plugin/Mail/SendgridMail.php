@@ -79,7 +79,7 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
    *   The queue factory service.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $configFactory, LoggerChannelFactoryInterface $loggerChannelFactory, ModuleHandlerInterface $moduleHandler, QueueFactory $queueFactory) {
-    $this->configFactory  = $configFactory;
+    $this->configFactory = $configFactory;
     $this->logger = $loggerChannelFactory->get('sendgrid_integration');
     $this->moduleHandler = $moduleHandler;
     $this->queueFactory = $queueFactory;
@@ -188,7 +188,10 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
     ];
 
     // Allow other modules to modify categories.
-    $this->moduleHandler->invokeAll('sendgrid_integration_categories_alter', [$message, $categories]);
+    $this->moduleHandler->invokeAll('sendgrid_integration_categories_alter', [
+      $message,
+      $categories,
+    ]);
 
     // Check if we got any variable back.
     if (!empty($result)) {

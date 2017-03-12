@@ -10,6 +10,7 @@ class SendGridMailSystem implements MailSystemInterface {
    * Email formatting, example strip away html.
    *
    * @param array $message
+   *
    * @return array
    */
   public function format(array $message) {
@@ -24,6 +25,7 @@ class SendGridMailSystem implements MailSystemInterface {
    * Implement mail method to send mail via Sendgrid.
    *
    * @param array $message
+   *
    * @return bool
    */
   public function mail(array $message) {
@@ -131,7 +133,7 @@ class SendGridMailSystem implements MailSystemInterface {
     $address_cc_bcc = [];
 
     // use Sendgrid Templates if they have been set
-    if(!empty($message['sendgrid']['template_id'])) {
+    if (!empty($message['sendgrid']['template_id'])) {
       $sendgrid_message->setTemplateId($message['sendgrid']['template_id']);
     }
 
@@ -511,6 +513,7 @@ class SendGridMailSystem implements MailSystemInterface {
    *   A string containing the character just before the sought after text.
    * @param $ending_character
    *   A string containing the character just after the sought after text.
+   *
    * @return string
    *   A string with the text found between the $beginning_character and the
    *   $ending_character.
@@ -539,6 +542,7 @@ class SendGridMailSystem implements MailSystemInterface {
    *   A string containing the body text to parse.
    * @param boundary
    *   A string with the boundary string to parse on.
+   *
    * @return array
    *   An array containing the resulting mime parts
    */
@@ -567,6 +571,7 @@ class SendGridMailSystem implements MailSystemInterface {
    *
    * @param string $input
    *   A string containing the body part to strip.
+   *
    * @return string
    *   A string with the stripped body part.
    */

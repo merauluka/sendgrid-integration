@@ -25,12 +25,14 @@
  */
 function hook_sendgrid_integration_sent($to, $unique_args, $response) {
   if ($unique_args['module'] == 'my_module' && $result_code = 200) {
-    \Drupal::logger('My Module')->notice('My module has successfully sent email');
+    \Drupal::logger('My Module')
+      ->notice('My module has successfully sent email');
   }
 }
 
 /**
- * This hook is invoked before mail is sent, allowing modification of unique_args.
+ * This hook is invoked before mail is sent, allowing modification of
+ * unique_args.
  *
  * @param array $unique_args
  *   Unique arguments.
@@ -45,7 +47,8 @@ function hook_sendgrid_integration_unique_args_alter($unique_args) {
 }
 
 /**
- * This hook is invoked before mail is sent, allowing modification of categories.
+ * This hook is invoked before mail is sent, allowing modification of
+ * categories.
  *
  * @param array $categories
  *   An array of categories for Sendgrid statistics.
