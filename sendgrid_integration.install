@@ -6,6 +6,7 @@
  */
 
 use Drupal\mailsystem\MailsystemManager;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_install().
