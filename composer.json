@@ -1,9 +1,16 @@
 {
-  "name": "mikeyp/sendgrid_integration",
+  "name": "drupal/sendgrid_integration",
   "description": "Drupal module for integrating with the SendGrid API.",
   "type": "drupal-module",
   "homepage": "https://www.drupal.org/project/sendgrid_integration",
   "license": "GPL v2",
+  "authors": [
+    {
+      "name": "Brady Owens (perignon)",
+      "homepage": "https://www.drupal.org/u/perignon",
+      "role": "Maintainer"
+    }
+  ],
   "keywords": [
     "SendGrid",
     "sendgrid",
@@ -12,6 +19,11 @@
     "grid",
     "php"
   ],
+  "support": {
+    "issues": "https://drupal.org/project/issues/sendgrid_integration",
+    "source": "http://cgit.drupalcode.org/sendgrid_integration"
+  },
+  "minimum-stability": "dev",
   "require": {
     "fastglass/sendgrid": ">=1.0.6"
   }
