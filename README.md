@@ -28,6 +28,10 @@ PHP dependencies for this module are loaded via Composer in Drupal 8.
 
 INSTALLATION
 --------------------------------------------------------------------------------
+Before starting your installation, be aware that this module uses composer to
+load dependencies. In Drupal 8, there are different ways to configure your site
+to use [composer for contributed modules](https://www.drupal.org/node/2718229#managing-contributed).
+
 Installing this module requires some more advanced knowledge, use of the command
 line and the use of Drush.
 
