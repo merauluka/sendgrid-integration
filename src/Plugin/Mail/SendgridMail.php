@@ -252,8 +252,14 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
               break;
 
             case 'text/html':
+              // Ensure body is a string before using it as HTML.
+              $body = $message['body'];
+              if ($body instanceof MarkupInterface) {
+                $body = $body->__toString();
+              }
+
               // The message includes only an HTML part.
-              $sendgrid_message->setHtml($message['body']);
+              $sendgrid_message->setHtml($body);
               // Also include a text only version of the email.
               $sendgrid_message->setText(MailFormatHelper::wrapMail(MailFormatHelper::htmlToText($message['body'])));
               break;
