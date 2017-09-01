@@ -12,6 +12,7 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Mail\MailInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueFactory;
+use Html2Text\Html2Text;
 use SendGrid\Email;
 use SendGrid\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -261,8 +262,11 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
 
               // The message includes only an HTML part.
               $sendgrid_message->setHtml($body);
+
               // Also include a text only version of the email.
-              $sendgrid_message->setText(MailFormatHelper::wrapMail(MailFormatHelper::htmlToText($message['body'])));
+              $converter = new Html2Text($message['body']);
+              $body_plain = $converter->getText();
+              $sendgrid_message->setText(MailFormatHelper::wrapMail($body_plain));
               break;
 
             case 'multipart/related':
