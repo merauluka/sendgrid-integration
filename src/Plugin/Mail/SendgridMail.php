@@ -420,6 +420,16 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
       $sendgrid_message->setAttachments($attachments);
     }
 
+    // Add template ID.
+    if (isset($message['sendgrid']['template_id'])) {
+      $sendgrid_message->setTemplateId($message['sendgrid']['template_id']);
+    }
+
+    // Add substitutions.
+    if (isset($message['sendgrid']['substitutions'])) {
+      $sendgrid_message->setSubstitutions($message['sendgrid']['substitutions']);
+    }
+
     // Lets try and send the message and catch the error.
     try {
       $response = $client->send($sendgrid_message);
