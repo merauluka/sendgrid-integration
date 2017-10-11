@@ -70,20 +70,33 @@ class SendGridSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Authentication'),
     ];
 
+    $key_exists = $this->moduleHandler->moduleExists('key');
+
     $requirenewkey = TRUE;
-    if (!empty($config->get('apikey'))) {
+    if (!$key_exists && !empty($config->get('apikey'))) {
       $form['authentication']['secretkeynotice'] = [
         '#markup' => $this->t('You have saved a secret key. You may change the key by inputing a new one in the field directly below.'),
       ];
       $requirenewkey = FALSE;
     }
 
-    $form['authentication']['sendgrid_integration_apikey'] = [
-      '#type' => 'password',
-      '#required' => $requirenewkey,
-      '#title' => $this->t('API Secret Key'),
-      '#description' => $this->t('The secret key of your key pair. These are only generated once by Sendgrid. Your existing key is hidden. If you need to change this, provide a new key here.'),
-    ];
+    if ($key_exists) {
+      $form['authentication']['sendgrid_integration_apikey'] = [
+        '#type' => 'key_select',
+        '#required' => TRUE,
+        '#default_value' => $config->get('apikey'),
+        '#title' => $this->t('API Secret Key'),
+        '#description' => $this->t('The secret key of your key pair. These are only generated once by Sendgrid.'),
+      ];
+    }
+    else {
+      $form['authentication']['sendgrid_integration_apikey'] = [
+        '#type' => 'password',
+        '#required' => $requirenewkey,
+        '#title' => $this->t('API Secret Key'),
+        '#description' => $this->t('The secret key of your key pair. These are only generated once by Sendgrid. Your existing key is hidden. If you need to change this, provide a new key here.'),
+      ];
+    }
 
     return parent::buildForm($form, $form_state);
   }
@@ -92,6 +105,11 @@ class SendGridSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ($this->moduleHandler->moduleExists('key')) {
+      parent::validateForm($form, $form_state);
+      return;
+    }
+
     $config = $this->config('sendgrid_integration.settings');
     // Check for API secret key. If missing throw error.
     if (empty($config->get('apikey')) && empty($form_state->getValue('sendgrid_integration_apikey'))) {
@@ -106,8 +124,14 @@ class SendGridSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('sendgrid_integration.settings');
 
-    if ($form_state->hasValue('sendgrid_integration_apikey') && !empty($form_state->getValue('sendgrid_integration_apikey'))) {
-      $config->set('apikey', $form_state->getValue('sendgrid_integration_apikey'));
+    if ($this->moduleHandler->moduleExists('key')) {
+      $key_name = $form_state->getValue('sendgrid_integration_apikey');
+      $config->set('apikey', $key_name);
+    }
+    else {
+      if ($form_state->hasValue('sendgrid_integration_apikey') && !empty($form_state->getValue('sendgrid_integration_apikey'))) {
+        $config->set('apikey', $form_state->getValue('sendgrid_integration_apikey'));
+      }
     }
 
     $config->save();
