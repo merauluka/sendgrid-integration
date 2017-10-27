@@ -384,7 +384,7 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
           break;
 
         case 'reply-to':
-          if (isset($message['headers']['Reply-To'])) {
+          if (isset($message['headers']['Reply-To']) || isset($message['headers']['reply-to']) && $message['headers']['reply-to'] = $message['headers']['Reply-To']) {
             $sendgrid_message->setReplyTo($message['headers']['Reply-To']);
           }
           break;
