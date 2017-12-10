@@ -32,8 +32,10 @@ Before starting your installation, be aware that this module uses composer to
 load dependencies. In Drupal 8, there are different ways to configure your site
 to use [composer for contributed modules](https://www.drupal.org/node/2718229#managing-contributed).
 
-Installing this module requires composer to download the dependencies for the
-module.
+As of recent changes with Drush for Drupal 8.4, there is no option to download
+a module with Drush. All downloading of modules now resides with composer.
+
+**Installation via command line and composer:**
 
 1. Start at the root of your Drupal 8 installation and issue the command
    <code>composer require drupal/sendgrid_integration</code>
@@ -51,6 +53,9 @@ module.
    example, see this [image](https://www.drupal.org/files/issues/sengrid-integration-mailsystem-settings-example.png).
 
 * Composer Documentation: [https://getcomposer.org/doc/](https://getcomposer.org/doc/)
+
+* We are going to update the D8 version of this module to allow for an optional
+manual installation of the API wrapper.
 
 HTML Email
 --------------------------------------------------------------------------------
