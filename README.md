@@ -32,17 +32,20 @@ Before starting your installation, be aware that this module uses composer to
 load dependencies. In Drupal 8, there are different ways to configure your site
 to use [composer for contributed modules](https://www.drupal.org/node/2718229#managing-contributed).
 
-Installing this module requires some more advanced knowledge, use of the command
-line and the use of Drush.
+Installing this module requires composer to download the dependencies for the
+module.
 
-1. Move this folder under modules directory of your installation,
-   example sites/all/modules or sites/default/modules
+1. Start at the root of your Drupal 8 installation and issue the command
+   <code>composer require drupal/sendgrid_integration</code>
+   
+2. The module will be downloaded from Drupa.org, the dependen API wrapper will 
+   be downloaded from Github, and your main composer.json will be update.
 
-2. Navigate to Modules and enable SendGrid Integration in the Mail category.
+3. Navigate to Modules and enable SendGrid Integration in the Mail category.
 
-3. Configure your SendGrid API-Key in admin/config/services/sendgrid
+4. Configure your SendGrid API-Key in admin/config/services/sendgrid
 
-4. Confirm that the mail system is setup to use Sendgrid for how you wish to run
+5. Confirm that the mail system is setup to use Sendgrid for how you wish to run
    you website. If you want it all to run through Sendgrid then you set the
    System-wide default MailSystemInterface class to "SendGridMailSystem". As an
    example, see this [image](https://www.drupal.org/files/issues/sengrid-integration-mailsystem-settings-example.png).
