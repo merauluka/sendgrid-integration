@@ -2,19 +2,19 @@
 
 namespace Drupal\sendgrid_integration\Plugin\Mail;
 
-use SendGrid\Exception;
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Component\Utility\Unicode;
-use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Mail\MailInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Html2Text\Html2Text;
-use SendGrid\Email;
 use SendGrid\Client;
+use SendGrid\Email;
+use SendGrid\Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -384,7 +384,7 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
           break;
 
         case 'reply-to':
-          if (isset($message['headers']['Reply-To']) || isset($message['headers']['reply-to']) && $message['headers']['reply-to'] = $message['headers']['Reply-To']) {
+          if (isset($message['headers']['reply-to']) || (isset($message['headers']['Reply-To']) && $message['headers']['reply-to'] = $message['headers']['Reply-To'])) {
             $sendgrid_message->setReplyTo($message['headers']['Reply-To']);
           }
           break;
