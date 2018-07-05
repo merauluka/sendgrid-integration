@@ -11,6 +11,7 @@ use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Mail\MailInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueFactory;
+use Drupal\file\FileInterface;
 use Html2Text\Html2Text;
 use SendGrid\Client;
 use SendGrid\Email;
@@ -415,7 +416,7 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
       }
     }
 
-    // Prepare attachments.
+    // Prepare message attachments and params attachments.
     $attachments = [];
     if (isset($message['attachments']) && !empty($message['attachments'])) {
       foreach ($message['attachments'] as $attachmentitem) {
@@ -424,6 +425,32 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
         }
       }
     }
+    elseif (isset($message['params']['attachments']) && !empty($message['params']['attachments'])) {
+      foreach ($message['params']['attachments'] as $attachment) {
+        // Get filepath.
+        if (isset($attachment['filepath']) && is_file($attachment['filepath'])) {
+          $filepath = $attachment['filepath'];
+        }
+        elseif (isset($attachment['file']) && $attachment['file'] instanceof FileInterface) {
+          $filepath = \Drupal::service('file_system')->realpath($attachment['file']->getFileUri());
+        }
+        else {
+          continue;
+        }
+
+        // Get filename.
+        if (isset($attachment['filename'])) {
+          $filename = $attachment['filename'];
+        }
+        else {
+          $filename = basename($filepath);
+        }
+
+        // Attach file.
+        $attachments[$filename] = $filepath;
+      }
+    }
+
 
     // If we have attachments, add them.
     if (!empty($attachments)) {
