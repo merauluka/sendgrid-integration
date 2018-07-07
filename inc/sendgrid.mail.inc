@@ -378,7 +378,7 @@ class SendGridMailSystem implements MailSystemInterface {
         if (!empty($filters = $sendgrid_message->smtpapi->getFilters())) {
           $record->body .= 'Filters:' . "\n";
           foreach ($filters as $item) {
-            $record->body .= print_r($item) . "\n";
+            $record->body .= print_r($item, TRUE) . "\n";
           }
           $record->body .= $divider;
           $record->body .= $divider;
