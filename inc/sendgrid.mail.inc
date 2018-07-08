@@ -62,6 +62,11 @@ class SendGridMailSystem implements MailSystemInterface {
       $sendgrid_message->addFilter('bypass_list_management', 'enable', 1);
     }
 
+    // Bypass spam filters if requested by othe modules.
+    if (!empty($message['sendgrid']['bypass_list_management'])) {
+      $sendgrid_message->addFilter('bypass_list_management', 'enable', 1);
+    }
+
     if (isset($message['params']['account']->uid)) {
       $unique_args['uid'] = $message['params']['account']->uid;
     }
