@@ -1,0 +1,28 @@
+{
+  "require": {
+    "fastglass/sendgrid": {
+      "version": ">=1.0.6",
+      "url": "https://github.com/taz77/sendgrid-php-ng/archive/v1.0.8.zip"
+    },
+    "sendgrid/smtpapi": {
+      "version": "v0.6.1",
+      "url": "https://github.com/sendgrid/smtpapi-php/archive/v0.6.1.zip"
+    },
+    "html2text/html2text": {
+      "version": "~4.0.1",
+      "url": "https://github.com/mtibben/html2text/archive/4.0.1.zip"
+    },
+    "psr/http-message": {
+      "version": "v1.0.1",
+      "url": "https://github.com/php-fig/http-message/archive/1.0.1.zip"
+    },
+    "guzzlehttp/psr7": {
+      "version": "v1.4.2",
+      "url": "https://github.com/guzzle/psr7/archive/1.4.2.zip"
+    },
+    "guzzlehttp/promises": {
+      "version": "v1.3.1",
+      "url": "https://github.com/guzzle/promises/archive/v1.3.1.zip"
+    }
+  }
+}
