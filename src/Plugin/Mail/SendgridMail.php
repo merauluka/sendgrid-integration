@@ -175,10 +175,12 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
     }
 
     // Checking if 'from' email-address already exist.
-    if (isset($message['headers']['from']) || isset($message['headers']['From']) && $message['headers']['from'] == $message['headers']['From']) {
-      $fromaddrarray = $this->parseAddress($message['headers']['from']);
-      $data['from'] = $fromaddrarray[0];
-      $data['fromname'] = $fromaddrarray[1];
+    if (isset($message['headers']['from'])) {
+      if (isset($message['headers']['From']) && $message['headers']['from'] == $message['headers']['From']) {
+        $fromaddrarray = $this->parseAddress($message['headers']['from']);
+        $data['from'] = $fromaddrarray[0];
+        $data['fromname'] = $fromaddrarray[1];
+      }
     }
     else {
       $data['from'] = $site_config->get('mail');
