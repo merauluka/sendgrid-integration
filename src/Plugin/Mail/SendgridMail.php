@@ -473,10 +473,15 @@ class SendGridMail implements MailInterface, ContainerFactoryPluginInterface {
     try {
       $response = $client->send($sendgrid_message);
     }
-    catch (Exception $e) {
-      $this->logger->error('Sending emails to Sengrind service failed with error code ' . $e->getCode());
-      foreach ($e->getErrors() as $error_info) {
-        $this->logger->error('Sendgrid generated error ' . $error_info);
+    catch (\Exception $e) {
+      $this->logger->error('Sending emails to Sendgrid service failed with error code ' . $e->getCode());
+      if ($e instanceof Exception) {
+        foreach ($e->getErrors() as $error_info) {
+          $this->logger->error('Sendgrid generated error ' . $error_info);
+        }
+      }
+      else {
+        $this->logger->error($e->getMessage());
       }
       // Add message to queue if reason for failing was timeout or
       // another valid reason. This adds more error tolerance.
