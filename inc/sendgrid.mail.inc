@@ -72,7 +72,7 @@ class SendGridMailSystem implements MailSystemInterface {
     }
 
     // Allow other modules to modify unique arguments.
-    $args = module_invoke_all('sendgrid_integration_unique_args_alter', $unique_args);
+    $args = module_invoke_all('sendgrid_integration_unique_args_alter', $unique_args, $message);
 
     // Check if we got any variable back.
     if (!empty($args)) {

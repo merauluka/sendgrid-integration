@@ -37,11 +37,15 @@ function hook_sendgrid_integration_sent($to, $unique_args, $response) {
  * @param array $unique_args
  *   Unique arguments.
  *
+ * @param array $message
+ *   The email message
+ *
  * @return array
  *   Returned array will be used as unique arguments.
  */
-function hook_sendgrid_integration_unique_args_alter($unique_args) {
+function hook_sendgrid_integration_unique_args_alter($unique_args, $message) {
   $unique_args['time'] = time();
+  $unique_args['subject'] = $message['params']['subject'];
 
   return $unique_args;
 }
