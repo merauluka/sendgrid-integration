@@ -98,6 +98,17 @@ class SendGridSettingsForm extends ConfigFormBase {
       ];
     }
 
+    $form['debug'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Debug options'),
+    ];
+    $form['debug']['debug_status'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable debug logging'),
+      '#default_value' => $config->get('debug_status'),
+      '#description' => $this->t('Enabling this will turn on additional logging of the Sendgrid email process. This can be helpful to troubleshoot email issues and should be disabled when no longer needed.'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -133,6 +144,8 @@ class SendGridSettingsForm extends ConfigFormBase {
         $config->set('apikey', $form_state->getValue('sendgrid_integration_apikey'));
       }
     }
+
+    $config->set('debug_status', $form_state->getValue('debug_status'));
 
     $config->save();
     parent::submitForm($form, $form_state);

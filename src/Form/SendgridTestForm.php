@@ -100,7 +100,7 @@ class SendGridTestForm extends FormBase {
     $form['include_attachment'] = [
       '#title' => $this->t('Include attachment'),
       '#type' => 'checkbox',
-      '#description' => t('If checked, the Drupal icon will be included as an attachment with the test email.'),
+      '#description' => $this->t('If checked, the Drupal icon will be included as an attachment with the test email.'),
       '#default_value' => TRUE,
     ];
     $form['body'] = [
@@ -153,8 +153,8 @@ class SendGridTestForm extends FormBase {
     else {
       $from = $site_settings->get('mail');
     }
-    $result = $this->mailManager->mail('sendgrid_integration', 'test', $config->get('test_defaults.to'), $this->languageManager->getDefaultLanguage()
-      ->getId(), $params, $from);
+    $result = $this->mailManager->mail('sendgrid_integration', 'test', $config->get('test_defaults.to'),
+      $this->languageManager->getDefaultLanguage()->getId(), $params, $from);
     if (isset($result['result']) && $result['result'] == TRUE) {
       drupal_set_message($this->t('SendGrid test email sent from %from to %to.', [
         '%from' => $from,

@@ -25,7 +25,7 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "fastglass/sendgrid": ">=1.0.10",
-    "html2text/html2text": "~4.0.1"
+    "html2text/html2text": "~4.0.1",
+    "sendgrid/sendgrid": "~7"
   }
 }

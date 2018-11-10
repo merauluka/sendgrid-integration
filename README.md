@@ -6,8 +6,8 @@ Use the issue tracker located at [Drupal.org](https://www.drupal.org/sendgrid_in
 for bug reports or questions about this module. If you want more info about
 SendGrid services, contact [SendGrid](https://sendgrid.com).
 
-This module uses a wrapper library for the SendGrid API. At the moment the
-wrapper library is for V2 of the API. V3 upgrade is being developed.
+This module uses a PHP wrapper library for the SendGrid API. This library
+supports v3 of the API.
 
 FUNCTIONALITY
 --------------------------------------------------------------------------------
@@ -39,8 +39,8 @@ a module with Drush. All downloading of modules now resides with composer.
 
 1. Start at the root of your Drupal 8 installation and issue the command
    <code>composer require drupal/sendgrid_integration</code>.
-   
-2. The module will be downloaded from Drupal.org, the dependent API wrapper will 
+
+2. The module will be downloaded from Drupal.org, the dependent API wrapper will
    be downloaded from Github, and your main composer.json will be updated.
 
 3. Navigate to Modules and enable SendGrid Integration in the Mail category.
@@ -81,6 +81,23 @@ and not this module.
 If you want to work on a solution for MIMEmail and contribute it back to the
 module, we gladly accept community contributions!
 
+USAGE
+--------------------------------------------------------------------------------
+In order to use this module, follow the installation instructions above. If
+advanced functionality is needed (such as the use of Sendgrid's hosted
+templates), then values can be added into a hook_mail() method and set values
+as follows:
+
+$message['sendgrid']['substitutions']['custom_value'] = 'Custom value';
+
+Then in Sendgrid, using the handlebar notation, adding the tag {{custom_value}}
+within your template will substitute the value from Drupal into the template.
+
+This method is good for global variables.
+
+See Sendgrid's online documentation for available values.
+https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html
+
 
 OPTIONAL
 --------------------------------------------------------------------------------
@@ -99,6 +116,13 @@ Debugging this module while installed can be done by installing the Maillog
 module (https://www.drupal.org/project/maillog). This module will allow you to
 store the emails locally before they are sent and view the message generated
 in the Sendgrid email object.
+
+Sendgrid System Status
+--------------------------------------------------------------------------------
+Sendgrid also provides a status page that can help when tracking down
+deliverability issues.
+http://status.sendgrid.com/
+
 
 RESOURCES
 --------------------------------------------------------------------------------
